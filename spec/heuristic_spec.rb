@@ -1,5 +1,5 @@
 require "./heuristic"
-require 'csv'
+require 'heuristic_helper'
 
 RSpec.describe Heuristic do
   context "creates a heuristic based on domain order" do
@@ -40,7 +40,7 @@ RSpec.describe Heuristic do
     end
 
     it "generates correct ordering for Albin Stanton" do
-      albin_stats = CSV::Row.new(["Student Name", "RF", "RL", "RI", "L"], ["Albin Stanton","2","3","K","3"])
+      albin_stats = HeuristicHelper.profile(name: "Albin Stanton", rf: "2", rl: "3", ri: "K", l: "3")
       expect(@heuristic.calculate(albin_stats)).to eq({ name: "Albin Stanton", curriculum: ["K.RI","1.RI","2.RF","2.RI","3.RF"] })
     end
   end
