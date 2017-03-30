@@ -60,7 +60,3 @@ RSpec.describe Heuristic do
     end
   end
 end
-
-# 1) Read domain_order.csv to generate a heuristic
-# 2) Use the heuristic to order students' curriculums
-# 3) Output this curriculum into a CSV.
