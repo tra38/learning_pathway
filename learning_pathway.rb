@@ -26,7 +26,13 @@ if validate_csv(domain_order_csv) && validate_csv(student_tests_csv)
     output_array << generated_row
   end
 
-  binding.pry
+  CSV.open("pathways.csv", "wb") do |csv|
+    output_array.each do |row|
+      csv << row
+    end
+  end
+
+  puts "pathways.csv generated in #{File.absolute_path("pathways.csv")}."
 else
   puts "Usage: learning_pathways.rb DOMAIN_ORDER_CSV_PATH STUDENT_TEST_CSV_PATH"
 end
