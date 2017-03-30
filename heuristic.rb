@@ -15,12 +15,14 @@ class Heuristic
 
   def calculate(student_row)
 
+    student_name = student_row["Student Name"]
+
     curriculum_array = find_valid_classes(student_row)
 
     if curriculum_array.length > 5
-      { name: student_row["Student Name"], curriculum: curriculum_array[0..4] }
+      { name: student_name, curriculum: curriculum_array[0..4] }
     else
-      { name: student_row["Student Name"], curriculum: curriculum_array }
+      { name: student_name, curriculum: curriculum_array }
     end
   end
 
