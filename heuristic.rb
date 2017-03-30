@@ -1,6 +1,3 @@
-require 'set'
-require 'pry'
-
 class Heuristic
   attr_reader :domain_order, :all_subjects, :all_grades
   def initialize(domain_order)
