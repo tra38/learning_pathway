@@ -36,12 +36,27 @@ RSpec.describe Heuristic do
     end
 
     it "determines the grade order of this school" do
-      expect(@heuristic.all_grades).to eq(["K", "1", "2", "3", "4", "5", "6"])
+      expect(@heuristic.all_grades).to eq({"K"=>0, "1"=>1, "2"=>2, "3"=>3, "4"=>4, "5"=>5, "6"=>6})
     end
 
     it "generates correct ordering for Albin Stanton" do
       albin_stats = HeuristicHelper.profile(name: "Albin Stanton", rf: "2", rl: "3", ri: "K", l: "3")
       expect(@heuristic.calculate(albin_stats)).to eq({ name: "Albin Stanton", curriculum: ["K.RI","1.RI","2.RF","2.RI","3.RF"] })
+    end
+
+    it "generates a curriculum less than 5 classes for Makena Gray, a student who is currently at the 6th grade level" do
+      makena_stats = HeuristicHelper.profile(name: "Makena Gray", rf: "6", rl: "6", ri: "6", l: "6")
+      expect(@heuristic.calculate(makena_stats)).to eq({ name: "Makena Gray", curriculum: ["6.RI", "6.RL"] })
+    end
+
+    it "generates a generic curriculum for Noga Michi, a person who does not have any test scores" do
+      noga_stats = HeuristicHelper.profile(name: "Noga Michi", rf: nil, rl: nil, ri: nil, l: nil)
+      expect(@heuristic.calculate(noga_stats)).to eq({ name: "Noga Michi", curriculum: ["K.RF", "K.RL", "K.RI", "1.RF", "1.RL"] })
+    end
+
+    it "generates a curriculum for Alex Ainsley, a 3rd grade student who hasn't taken the L test" do
+      alex_stats = HeuristicHelper.profile(name: "Alex Ainsley", rf: "3", rl: "3", ri: "3", l: nil)
+      expect(@heuristic.calculate(alex_stats)).to eq({ name: "Alex Ainsley", curriculum: ["2.L", "3.RF", "3.RL", "3.RI", "3.L"] })
     end
   end
 end
