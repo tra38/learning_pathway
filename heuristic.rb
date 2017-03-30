@@ -8,10 +8,6 @@ class Heuristic
     @all_subjects  = generate_subjects_array(grades_array)
   end
 
-  def class_completed?(student_grade:, subject_grade:)
-    all_grades[student_grade] > all_grades[subject_grade]
-  end
-
   def calculate(student_row)
 
     student_name = student_row["Student Name"]
@@ -58,5 +54,8 @@ class Heuristic
     hash
   end
 
+  def class_completed?(student_grade:, subject_grade:)
+    all_grades[student_grade] > all_grades[subject_grade]
+  end
 
 end
