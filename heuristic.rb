@@ -8,7 +8,7 @@ class Heuristic
     @all_subjects  = generate_subjects_array(grades_array)
   end
 
-  def below_threshold?(student_grade:, subject_grade:)
+  def class_completed?(student_grade:, subject_grade:)
     all_grades[student_grade] > all_grades[subject_grade]
   end
 
@@ -46,7 +46,7 @@ class Heuristic
     all_subjects.reject do |subject|
       subject_name = subject[:subject_name]
       subject_grade = subject[:grade]
-      below_threshold?(student_grade: student_row[subject_name], subject_grade: subject_grade)
+      class_completed?(student_grade: student_row[subject_name], subject_grade: subject_grade)
     end
   end
 
