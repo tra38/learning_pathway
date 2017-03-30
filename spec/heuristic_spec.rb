@@ -39,7 +39,7 @@ RSpec.describe Heuristic do
       expect(@heuristic.all_grades).to eq({"K"=>0, "1"=>1, "2"=>2, "3"=>3, "4"=>4, "5"=>5, "6"=>6})
     end
 
-    it "generates correct ordering for Albin Stanton" do
+    it "generates a curriculum for Albin Stanton, a normal student with varying grade levels" do
       albin_stats = HeuristicHelper.profile(name: "Albin Stanton", rf: "2", rl: "3", ri: "K", l: "3")
       expect(@heuristic.calculate(albin_stats)).to eq({ name: "Albin Stanton", curriculum: ["K.RI","1.RI","2.RF","2.RI","3.RF"] })
     end
